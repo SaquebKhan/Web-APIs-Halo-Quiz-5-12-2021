@@ -22,16 +22,17 @@ function qClicked() {
     // check if user answered wrong question
     // you can decrement time if user is wrong
     // create if to check if time hit 0 or time is still remaining
-    if (time < 0)
-        time = 0,
+    if (time < 0) { 
+        time = 0
     } 
     // display time on page
     // check if answer is correct, if correct move on to give gif
     // move to next question
     // check if we’re out of questions
     // if out of questions run endQuiz function else get next question
-    if (currentQIndex === question.length)
+    if (currentQIndex === question.length) {
         quizEnd();
+    }
         else {
             end();
         }
@@ -52,4 +53,8 @@ function qClicked() {
 // save highscores to local storage
 // retrieve high scores from local storage
 // creaye a new object to store users score fr the high score page
-// redirect to the highscores page (hint: window.location.href)
+// redirect to the highscores page (hint: window.location.href)\
+
+var f = document.getElementById("questionTitle")
+console.log(f)
+f.innerText = "FOOOOOOOO"
