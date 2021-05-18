@@ -6,12 +6,12 @@ var questions = [
     answer: "7"
   },
   {
-    title: "What is the purpoues of the rings?",
+    title: "What is the purposes of the rings?",
     choices: ["Wipes out all sentient life in the Milky Way", "Open a portal to salvation", "Destory planets", "Opens portal to difrent parts of the galaxy"],
     answer: "Wipes out all sentient life in the Milky Way"
   },
   {
-    title: "Which weponse can you not pick up in Halo 1?",
+    title: "Which weapons can you not pick up in Halo 1?",
     choices: ["Plasma rifle", "Needler", "Plasma grenade", "Energy sword"],
     answer: "Energy sword"
   },
