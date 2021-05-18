@@ -13,6 +13,7 @@ var submitBtn = document.getElementById("submit");
 var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
+var endScreenEl = document.getElementById("end-screen");
 
 // sound effects
 var sfxRight = new Audio("assets/sfx/correct.wav");
@@ -41,6 +42,7 @@ function startQuiz() {
 
 function ASK$$QUESTIONS() {
   // GET CURRENT QUESTION OBJECT FROM ARRAY WITH THE GLOBAL INDEX VARIABLE
+  console.log("hi");
   var currentQuestion = questions[currentQuestionIndex];
 
   // UPDATE QUESTION ON HMTL QUESTION ELEMENT
@@ -52,17 +54,22 @@ function ASK$$QUESTIONS() {
   // LOOP OVER CHOICES ARRAY
   for (var i = 0; i < currentQuestion.choices.length; i++) {
     // CREATE NEW BUTTON HTML ELEMENT FOR EACH CHOICE
+    var a = document.createElement('button');
 
     // ADD A CLASS ATTRIBUTE ON THIS BUTTON AND SET IT TO 'CHOICE'
+    a.setAttribute('class', 'choice');
 
     // ADD A VALUE ATTRIBUTE ON THIS BUTTON AND SET IT TO THE CURRENT CHOICE FROM ARRAY
+    a.value = currentQuestion.choices[i];
 
     // SET TEXT CONTEXT OF THIS BUTTON TO THE CURRENT CHOICE FROM ARRAY
+    a.textContent = currentQuestion.choices[i];
 
     // ADD EVENT LISTENER ON 'CLICK' TO THIS BUTTON, PASSING IN EVENT CALLBACK FUNCTION, USER$$CHOICE$$CB
+    a.onclick = USER$$CHOICE$$CB;
 
     // DISPLAY CHOICE ON THE PAGE BY APPENDING THIS BUTTON TO THE CHOICES ELEMENT
-
+    choicesEl.append(a);
 
   };
 }
@@ -80,21 +87,22 @@ function USER$$CHOICE$$CB(event) {
 
   if (event.target.value !== questions[currentQuestionIndex].answer) {
     // PENALIZE TIME BY SUBTRACTING 15 SECONDS FROM THE GLOBAL TIME VARIABLE
-
+    time = time - 15;
     // IF TIME IS LESS THAN 0, MAKE IT EQUAL TO 0
-
+    if (time < 0) { time=0; }
 
     // DISPLAY NEW TIME ON THE PAGE BY ASSIGNING TIME TO TEXT CONTEXT OF HTML TIMER ELEMENT
+    timerEl.textContent = time;
 
     // OPTIONAL - PLAY "WRONG" SOUND EFFECT
-    // sfxWrong.play();
+    sfxWrong.play();
 
     // ASSIGN  "WRONG!" TO TEXT CONTENT OF HTML FEEDBACK ELEMENT
     feedbackEl.textContent = "Wrong!";
 
   } else {
     // OPTIONAL - PALY "RIGHT" SOUND EFFECT
-    // sfxRight.play();
+    sfxRight.play();
 
     // ASSIGN "CORRECT!" TO TEXT CONTENT OF HTML FEEDBACK ELEMENT
     feedbackEl.textContent = "Correct!";
@@ -107,11 +115,12 @@ function USER$$CHOICE$$CB(event) {
   }, 1000);
 
   // MOVE TO NEXT QUESTION BY INCREMENTING THE GLOBAL INDEX VARIABLE
-
+  currentQuestionIndex = currentQuestionIndex +1;
   // CHEKC IF WE'VE RUN OUT OF QUESTIONS
   // 1. if we've run out, call quizEnd function
   // 2. else call ask questions funciton
-
+  if (currentQuestionIndex == 4) { quizEnd(); }
+  else { ASK$$QUESTIONS(); }
 }
 
 function quizEnd() {
@@ -121,7 +130,8 @@ function quizEnd() {
   // SHOW END SCREEN
   // 1. get end screen html element and store it to a variable
   // 2. set class attribute to 'show' on this element variable to display end screen
-
+  questionsEl.setAttribute("class", "hide");
+  endScreenEl.setAttribute("class", "show");
 
   // SHOW FINAL SCORE
   // 1. get final score html element and store it to a variable
@@ -167,7 +177,7 @@ function saveHighscore() {
     // SAVE TO LOCAL STORAGE
     // 1. push new score object to the scores array
     // 2. save updated scores array to local storage. do not forget to convert the object to string before saving it
-
+    localStorage.setItem (saveHighscore)
 
     // REDIRECT TO HIGH SCORES HTML PAGE
     window.location.href = "highscores.html";
