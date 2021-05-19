@@ -166,7 +166,7 @@ function saveHighscore() {
   if (initials !== "") {
     // GET SAVED SCORES FROM LOCAL STORAGE AND CONVERT IT AND STORE IT TO AN ARRAY VARIABLE
     // OR IF NOT ANY, SET IT TO EMPTY ARRAY
-
+    var highscores = JSON.parse(localStorage.getItem("highScores")) || [];
 
     // CREATE A NEW SCORE OBJECT FOR THE USER TO STORE SCORE AND INITIALS
     var newScore = {
@@ -176,10 +176,11 @@ function saveHighscore() {
 
     // SAVE TO LOCAL STORAGE
     // 1. push new score object to the scores array
+    highscores.push(newScore)
     // 2. save updated scores array to local storage. do not forget to convert the object to string before saving it
-    localStorage.setItem (saveHighscore)
+    localStorage.setItem("highScore", JSON.stringify(highscores));
 
-    // REDIRECT TO HIGH SCORES HTML PAGE
+    // // REDIRECT TO HIGH SCORES HTML PAGE
     window.location.href = "highscores.html";
   }
 }

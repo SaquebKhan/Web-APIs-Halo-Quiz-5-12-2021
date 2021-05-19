@@ -1,4 +1,6 @@
 function printHighscores() {
+
+  
   // either get scores from localstorage or set to empty array
   var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
 
@@ -15,6 +17,7 @@ function printHighscores() {
     // display on page
     var olEl = document.getElementById("highscores");
     olEl.appendChild(liTag);
+    
   });
 }
 
